@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Google Map Distance</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="assets/style.css">
+  </head>
+  <body>
+    <div class="map-container" >
+        <div id="map"></div>
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="input-address" placeholder="Enter your city"/>
+        </div>
+        <button id="select-point-button" 
+                draggable="false" 
+                aria-label="Select point"
+                title="Select Point"
+        ><i class="fa-solid fa-location-dot"></i>
+        </button>
+    </div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXwQ8Q_I-thHKC0mTz9NstrXIeEC_JCYU&libraries=geometry,drawing,places"></script>
+    <script type="text/javascript" src="assets/map.js"></script>
+  </body>
+</html>
