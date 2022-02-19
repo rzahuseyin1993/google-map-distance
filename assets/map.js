@@ -168,8 +168,10 @@ function initMap() {
     });
 
     google.maps.event.addListenerOnce(map, 'tilesloaded', function(){
+      
       document.querySelector(".search-box").style.display='flex';
       document.getElementById("select-point-button").style.display='block';
+
       map.addListener("mousemove", (e) => {
          if(cityMarker.position && targetClicked){
            var p1 = cityMarker.getPosition();
@@ -179,7 +181,7 @@ function initMap() {
       });
 
       map.addListener("click", (e) => {
-          if(targetClicked){
+          if(cityMarker.position && targetClicked){
               targetClicked = false;
               map.setOptions({
                 draggableCursor:'grab',
@@ -189,6 +191,9 @@ function initMap() {
                 map:map,
                 position:e.latLng
               });
+              var p1 = cityMarker.getPosition();
+              var p2 = e.latLng;
+              updateChanges(p1,p2);
           }
       });
 
@@ -199,8 +204,8 @@ function initMap() {
            draggingCursor:'none'
          });
          targetMarker.setMap(null);
-         distancePath.setMap(map)
-         labelMarker.setMap(map);
+         distancePath.setMap(null);
+         labelMarker.setMap(null);
       });
 
       targetMarker.addListener('drag', function(e){
@@ -212,6 +217,8 @@ function initMap() {
       });     
 
       function updateChanges(p1,p2){
+          distancePath.setMap(map)
+          labelMarker.setMap(map);
           var center = new google.maps.LatLng((p1.lat() + p2.lat())/2,(p1.lng() + p2.lng())/2);
           var dist = google.maps.geometry.spherical.computeDistanceBetween (p1,p2) * 0.000621371192; // miles
           var heading = google.maps.geometry.spherical.computeHeading(p1,p2);
