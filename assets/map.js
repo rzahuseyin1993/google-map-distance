@@ -164,13 +164,15 @@ function initMap() {
               map.setZoom(16);
             }
             map.setCenter(place.geometry.location);
+            document.getElementById("select-point-button").style.display="block";
+        }else{
+           document.getElementById("select-point-button").style.display="none";
         }
     });
 
     google.maps.event.addListenerOnce(map, 'tilesloaded', function(){
       
       document.querySelector(".search-box").style.display='flex';
-      document.getElementById("select-point-button").style.display='block';
 
       map.addListener("mousemove", (e) => {
          if(cityMarker.position && targetClicked){
@@ -198,14 +200,14 @@ function initMap() {
       });
 
       document.getElementById("select-point-button").addEventListener('click', function(){
-         targetClicked = true;
-         map.setOptions({
-           draggableCursor:`url('assets/images/home-green.png') 18 36, auto`,
-           draggingCursor:'none'
-         });
-         targetMarker.setMap(null);
-         distancePath.setMap(null);
-         labelMarker.setMap(null);
+          targetClicked = true;
+          map.setOptions({
+            draggableCursor:`url('assets/images/home-green.png') 18 36, auto`,
+            draggingCursor:'none'
+          });
+          targetMarker.setMap(null);
+          distancePath.setMap(null);
+          labelMarker.setMap(null);
       });
 
       targetMarker.addListener('drag', function(e){
